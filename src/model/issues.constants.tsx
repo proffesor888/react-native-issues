@@ -1,7 +1,6 @@
 const API_URL = 'https://api.github.com/repos/';
 const ISSUES_PER_PAGE = '10';
 const INITIAL_PAGE_NUMBER = 1;
-const TOKEN = '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';
 const DEFAULT_FILTER = 'all';
 const OPEN_FILTER = 'open';
 const CLOSED_FILTER = 'closed';
