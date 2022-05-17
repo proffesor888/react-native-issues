@@ -20,3 +20,11 @@ export const loadNextPageHandler = (addIssues: Function):void => {
 export const getSwitchTitle = (isBookmarked: boolean): string => {
     return isBookmarked ? "Bookmarked" : "Save to Bookmarks"
 }
+
+export const getStorageItems = (onSuccess: Function):void => {
+    const repo = CommunicationControllerInstance.getRepoName();
+    CommunicationControllerInstance.getStorageItems(repo)
+        .then(result => {
+            if(result && result.issues) onSuccess(result.issues);
+        })
+}

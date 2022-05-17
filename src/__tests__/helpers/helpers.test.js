@@ -3,6 +3,7 @@ import {
     filterIssuesHandler,
     loadNextPageHandler,
     getSwitchTitle,
+    getStorageItems
 } from "../../utils/helpers";
 import CommunicationControllerInstance from "../../api/CommunicationController";
 import renderer from 'react-test-renderer';

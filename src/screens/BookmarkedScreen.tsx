@@ -4,25 +4,18 @@ import { BookmarkedScreenProps} from "../navigation/types/navigation_types";
 import {useEffect, useState} from "react";
 import CommunicationControllerInstance from "../api/CommunicationController";
 import ListItemComponent from "../components/ListItem/ListItemComponent";
+import {getStorageItems} from "../utils/helpers";
 
 export const BookmarkedScreen:React.FC<BookmarkedScreenProps> = ({route, navigation}) => {
     const [bookmarkedIssues, setBookmarked] = useState<[] | Issue[]>([]);
 
     useEffect(() => {
-        const repo = CommunicationControllerInstance.getRepoName();
-        CommunicationControllerInstance.getStorageItems(repo)
-            .then(result => {
-                if(result && result.issues) setBookmarked(result.issues);
-            })
+        getStorageItems(setBookmarked);
     }, []);
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
-            const repo = CommunicationControllerInstance.getRepoName();
-            CommunicationControllerInstance.getStorageItems(repo)
-                .then(result => {
-                    if(result && result.issues) setBookmarked(result.issues);
-                })
+            getStorageItems(setBookmarked);
         });
         return unsubscribe;
     }, [navigation]);
