@@ -28,3 +28,16 @@ export const getStorageItems = (onSuccess: Function):void => {
             if(result && result.issues) onSuccess(result.issues);
         })
 }
+
+export const removeFromBookmarks = (id: number, onSuccess: Function):void => {
+    CommunicationControllerInstance.removeStorageItem(id)
+        .then((result) => {
+            if(!result) onSuccess(false)
+        });
+}
+export const saveToBookmarks = (value: Issue, onSuccess: Function): void => {
+    CommunicationControllerInstance.setStorageItem(value)
+        .then((result) => {
+            if(!result) onSuccess(true)
+        });
+}

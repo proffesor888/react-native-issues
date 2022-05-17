@@ -3,10 +3,11 @@ import {
     filterIssuesHandler,
     loadNextPageHandler,
     getSwitchTitle,
-    getStorageItems
 } from "../../utils/helpers";
 import CommunicationControllerInstance from "../../api/CommunicationController";
 import renderer from 'react-test-renderer';
+import {mockIssue, mockIssuesArray} from "../../model/jestMock";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 describe("helpers", () => {
     test("save organization", () => {

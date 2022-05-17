@@ -69,6 +69,20 @@ class CommunicationController {
             return e;
         }
     }
+    async removeStorageItem(id: number):Promise<void | undefined> {
+        try {
+            const storage = await AsyncStorage.getItem(`@${this.getRepoName()}`);
+            if (storage) {
+                const parsedStorage = JSON.parse(storage);
+                const updatedIssuesList = parsedStorage.issues.filter((issue: Issue) => issue.id !== id);
+                const newStorage = {issues: updatedIssuesList};
+                await AsyncStorage.removeItem(`@${this.getRepoName()}`);
+                return await AsyncStorage.setItem(`@${this.getRepoName()}`, JSON.stringify(newStorage));
+            }
+        } catch (e) {
+            return e
+        }
+    }
     async fetchIssues(
         org_name:string | undefined = this.organization_name,
         repo_name:string | undefined = this.repo_name,

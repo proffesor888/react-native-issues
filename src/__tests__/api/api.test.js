@@ -53,6 +53,11 @@ describe("Communication methods", () => {
         await CommunicationControllerInstance.setStorageItem(mockIssue);
         expect(AsyncStorage.setItem).toBeCalledWith('@test', storageSaveType);
     })
+    test("remove storage item", async() => {
+        await CommunicationControllerInstance.setStorageItem(mockIssue);
+        await CommunicationControllerInstance.removeStorageItem(mockIssue.id);
+        expect(AsyncStorage.removeItem).toBeCalledWith('@test');
+    })
     test("api fetch error", async () => {
         global.fetch = jest.fn(() => Promise.resolve(({
             json: () => Promise.resolve({message: 'no such repository'})

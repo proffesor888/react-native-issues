@@ -3,25 +3,21 @@ import type {IssuesDetailsScreenProps} from '../navigation/types/navigation_type
 import Details from "../components/Details/DetailsComponent";
 import SwitchComponent from "../components/Switch/SwitchComponent";
 import {useState} from "react";
-import CommunicationControllerInstance from "../api/CommunicationController";
-import {getSwitchTitle} from "../utils/helpers";
+import {getSwitchTitle, saveToBookmarks, removeFromBookmarks} from "../utils/helpers";
 import {ScrollView} from 'react-native';
 
 export const IssueDetailsScreen: React.FC<IssuesDetailsScreenProps> = ({route}) => {
     const {issue: {title, state, id, body, created_at, updated_at}} = route.params;
     const initialBookmarkState = !!route.params.isBookmarked;
-
     const [isBookmarked, setBookmark] = useState<boolean>(initialBookmarkState);
     const toggleBookmark = (): void => {
         const issue={title, state, id, body, created_at, updated_at};
-        saveToBookmarks(issue);
+        if(isBookmarked) {
+            removeFromBookmarks(id, setBookmark);
+        } else {
+            saveToBookmarks(issue, setBookmark);
+        }
     };
-    const saveToBookmarks = (value: Issue): void => {
-        CommunicationControllerInstance.setStorageItem(value)
-            .then((result) => {
-                if(!result) setBookmark(true)
-            });
-    }
     return(
         <ScrollView style={{flex: 1}}>
             <SwitchComponent
