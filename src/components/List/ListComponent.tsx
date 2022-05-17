@@ -1,5 +1,6 @@
 import {FlatList, View} from "react-native";
 import * as React from "react";
+import { useMemo } from "react";
 import ListItemComponent from "../ListItem/ListItemComponent";
 import {styles} from './styles/List_style';
 
@@ -19,6 +20,7 @@ const ListComponent: React.FC<ListProp> = ({items, onItemClick, loadNextPage}) =
                 onEndReached={() => loadNextPage()}
                 onEndReachedThreshold={0.1}
                 extraData={items}
+                keyExtractor={(item) => item.title}
             />
         </View>
     )

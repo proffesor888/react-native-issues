@@ -5,6 +5,7 @@ import SwitchComponent from "../components/Switch/SwitchComponent";
 import {useState} from "react";
 import CommunicationControllerInstance from "../api/CommunicationController";
 import {getSwitchTitle} from "../utils/helpers";
+import {ScrollView} from 'react-native';
 
 export const IssueDetailsScreen: React.FC<IssuesDetailsScreenProps> = ({route}) => {
     const {issue: {title, state, id, body, created_at, updated_at}} = route.params;
@@ -22,7 +23,7 @@ export const IssueDetailsScreen: React.FC<IssuesDetailsScreenProps> = ({route}) 
             });
     }
     return(
-        <>
+        <ScrollView style={{flex: 1}}>
             <SwitchComponent
                 title={getSwitchTitle(isBookmarked)}
                 value={isBookmarked}
@@ -36,6 +37,6 @@ export const IssueDetailsScreen: React.FC<IssuesDetailsScreenProps> = ({route}) 
                 created_at={created_at}
                 updated_at={updated_at}
             />
-        </>
+        </ScrollView>
     )
 };

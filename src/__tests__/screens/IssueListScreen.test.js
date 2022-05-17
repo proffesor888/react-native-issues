@@ -8,7 +8,7 @@ import {mockIssuesArray} from "../../model/jestMock";
 describe("IssueListScreen", () => {
     test("default components renders", () => {
         const screen = renderer.create(<IssuesListScreen route={{params: {issues: []}}} navigation={{}} />).toJSON();
-        expect(screen.children.length).toEqual(2);
+        expect(screen.children.length).toEqual(1);
     })
     test("add issue to list", () => {
         const {result} = renderHook(useIssueListHook);

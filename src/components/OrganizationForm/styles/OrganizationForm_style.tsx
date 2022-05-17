@@ -6,12 +6,14 @@ export const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
+        padding: 15
     },
     input: {
         borderWidth: 1,
         padding: 10,
         height: 40,
-        margin: 10
+        margin: 10,
+        width: 300
     },
     button: {
         alignItems: "center",

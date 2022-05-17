@@ -16,6 +16,17 @@ export const BookmarkedScreen:React.FC<BookmarkedScreenProps> = ({route, navigat
             })
     }, []);
 
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('focus', () => {
+            const repo = CommunicationControllerInstance.getRepoName();
+            CommunicationControllerInstance.getStorageItems(repo)
+                .then(result => {
+                    if(result && result.issues) setBookmarked(result.issues);
+                })
+        });
+        return unsubscribe;
+    }, [navigation]);
+
     const handleItemListSelection = <T extends Issue>(item: T): void => {
         navigation.navigate('IssueDetails', {issue: item, isBookmarked: true});
     }

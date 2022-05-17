@@ -53,18 +53,12 @@ describe("Communication methods", () => {
         await CommunicationControllerInstance.setStorageItem(mockIssue);
         expect(AsyncStorage.setItem).toBeCalledWith('@test', storageSaveType);
     })
-    test("handle error", () => {
-        const mockError = {message: 'bad request'};
-        const error = CommunicationControllerInstance.handleError(mockError);
-        expect(error).toBe(mockError);
-    })
     test("api fetch error", async () => {
         global.fetch = jest.fn(() => Promise.resolve(({
             json: () => Promise.resolve({message: 'no such repository'})
         })));
         const spyErrorHandler = spyOn(CommunicationControllerInstance, 'handleError');
-        let serverResponse = null;
-        const onSuccess = jest.fn((result) => serverResponse = result);
+        const onSuccess = jest.fn();
         await CommunicationControllerInstance.fetchIssues('facebook', 'react', onSuccess);
         expect(fetch).toHaveBeenCalledTimes(1);
         expect(spyErrorHandler).toHaveBeenCalledWith({message: 'no such repository'});

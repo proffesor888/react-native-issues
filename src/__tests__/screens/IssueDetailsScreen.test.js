@@ -6,6 +6,6 @@ import {mockIssue} from "../../model/jestMock";
 describe("IssueDetailsScreen", () => {
     test("default components renders", () => {
         const screen = renderer.create(<IssueDetailsScreen route={{params: {issue: mockIssue}}} />).toJSON();
-        expect(screen.length).toEqual(2);
+        expect(screen.children.length).toEqual(1);
     })
 })

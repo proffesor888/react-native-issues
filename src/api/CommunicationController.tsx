@@ -75,7 +75,7 @@ class CommunicationController {
         onSuccessFunc: Function
     ):Promise<void | {message: string}> {
         const url = `${CONSTANTS.API_URL}${org_name}/${repo_name}/issues?per_page=${this.getItemsPerPage()}&page=${this.getCurrentPage()}&state=${this.getFilter()}`;
-        const response = await fetch(url, {headers: {'Authorization': `token ${CONSTANTS.TOKEN}`}});
+        const response = await fetch(url);
         const json = await response.json();
         if(json.message) {
             return this.handleError(json);
