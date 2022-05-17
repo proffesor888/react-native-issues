@@ -1,0 +1,3 @@
+type FilterComponentProps = {
+    filterIssues: Function
+}
